@@ -1,9 +1,8 @@
 package de.seuhd.campuscoffee.tests.system;
 
-import de.seuhd.campuscoffee.api.mapper.PosDtoMapper;
-import de.seuhd.campuscoffee.domain.ports.PosService;
-import de.seuhd.campuscoffee.domain.ports.UserService;
-import io.restassured.RestAssured;
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,11 +12,13 @@ import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.testcontainers.containers.PostgreSQLContainer;
 
-import java.util.List;
-
+import de.seuhd.campuscoffee.api.mapper.PosDtoMapper;
+import de.seuhd.campuscoffee.api.mapper.UserDtoMapper;
+import de.seuhd.campuscoffee.domain.ports.PosService;
+import de.seuhd.campuscoffee.domain.ports.UserService;
 import static de.seuhd.campuscoffee.tests.SystemTestUtils.configurePostgresContainers;
 import static de.seuhd.campuscoffee.tests.SystemTestUtils.getPostgresContainer;
-import static org.assertj.core.api.Assertions.assertThat;
+import io.restassured.RestAssured;
 
 /**
  * Abstract base class for system tests.
@@ -48,8 +49,8 @@ public abstract class AbstractSysTest {
     protected PosDtoMapper posDtoMapper;
 
     //TODO: Uncomment after user DTO mapper is implemented
-    //@Autowired
-    //protected UserDtoMapper userDtoMapper;
+    @Autowired
+    protected UserDtoMapper userDtoMapper;
 
     @LocalServerPort
     private Integer port;
@@ -58,7 +59,7 @@ public abstract class AbstractSysTest {
     void beforeEach() {
         posService.clear();
         //TODO: Uncomment after user service is implemented
-        //userService.clear();
+        userService.clear();
         RestAssured.baseURI = "http://localhost:" + port;
     }
 

@@ -1,17 +1,18 @@
 package de.seuhd.campuscoffee.data.persistence;
 
-import jakarta.transaction.Transactional;
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
-import java.util.Optional;
+import jakarta.transaction.Transactional;
 
 /**
  * Repository for persisting user entities.
  */
 public interface UserRepository extends JpaRepository<UserEntity, Long>, ResettableSequenceRepository {
-    Optional<UserEntity> findByLoginName(String loginName);
+    Optional<UserEntity> findByName(String name);
 
     /**
      * Resets the user ID sequence to start from 1.

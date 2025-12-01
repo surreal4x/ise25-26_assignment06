@@ -1,13 +1,21 @@
 package de.seuhd.campuscoffee.data.persistence;
 
-import jakarta.persistence.*;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
+import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.time.LocalDateTime;
-import java.time.ZoneId;
 
 /**
  * Database entity for a registered user.
@@ -36,7 +44,7 @@ public class UserEntity {
     private LocalDateTime updatedAt;
 
     @Column(name = LOGIN_NAME_COLUMN, unique = true)
-    private String loginName;
+    private String name;
 
     @Column(name = EMAIL_ADDRESS_COLUMN, unique = true)
     private String emailAddress;
